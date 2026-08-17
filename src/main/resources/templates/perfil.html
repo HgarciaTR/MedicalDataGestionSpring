@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Medical Data Gestión | Perfil</title>
+
+    <style>
+
+        body {
+
+            margin: 0;
+            padding: 0;
+            background: #e9eef5;
+            font-family: Arial, Helvetica, sans-serif;
+
+        }
+
+        .contenedor {
+
+            width: 90%;
+            max-width: 650px;
+            margin: 50px auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+
+        }
+
+        h1 {
+
+            text-align: center;
+            color: #1565C0;
+            margin-bottom: 25px;
+
+        }
+
+        .dato {
+
+            padding: 15px;
+            margin-bottom: 12px;
+            background: #f4f7fb;
+            border-radius: 6px;
+
+        }
+
+        .dato strong {
+
+            display: inline-block;
+            width: 180px;
+            color: #333333;
+
+        }
+
+        .boton {
+
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 18px;
+            background: #1976D2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+
+        }
+
+        .boton:hover {
+
+            background: #0D47A1;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <h1>Mi perfil</h1>
+
+    <div class="dato">
+        <strong>ID:</strong>
+        <span th:text="${usuario.idUsuario}"></span>
+    </div>
+
+    <div class="dato">
+        <strong>Nombre:</strong>
+        <span th:text="${usuario.nombre}"></span>
+    </div>
+
+    <div class="dato">
+        <strong>Apellido:</strong>
+        <span th:text="${usuario.apellido}"></span>
+    </div>
+
+    <div class="dato">
+        <strong>Correo:</strong>
+        <span th:text="${usuario.correo}"></span>
+    </div>
+
+    <div class="dato">
+        <strong>Fecha de registro:</strong>
+        <span th:text="${usuario.fechaRegistro}"></span>
+    </div>
+
+    <a class="boton"
+       th:href="@{/panel}">
+        Volver al panel
+    </a>
+
+</div>
+
+</body>
+
+</html>

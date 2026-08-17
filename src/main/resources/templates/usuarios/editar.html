@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
+-->
+<!DOCTYPE html>
+
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Editar usuario</title>
+
+    <style>
+
+        body{
+
+            margin:0;
+            padding:0;
+            background:#e9eef5;
+            font-family:Arial, Helvetica, sans-serif;
+
+        }
+
+        .contenedor{
+
+            width:500px;
+            margin:50px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0px 0px 15px rgba(0,0,0,0.20);
+
+        }
+
+        h1{
+
+            text-align:center;
+            color:#1565C0;
+
+        }
+
+        label{
+
+            font-weight:bold;
+
+        }
+
+        input[type=text],
+        input[type=email],
+        input[type=password],
+        input[type=date]{
+
+            width:100%;
+            padding:10px;
+            margin-top:5px;
+            margin-bottom:15px;
+            border-radius:5px;
+            border:1px solid #cccccc;
+            box-sizing:border-box;
+
+        }
+
+        input[type=submit]{
+
+            width:100%;
+            padding:12px;
+            background:#1976D2;
+            color:white;
+            border:none;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:15px;
+            margin-top:10px;
+
+        }
+
+        input[type=submit]:hover{
+
+            background:#0D47A1;
+
+        }
+
+        .volver{
+
+            display:block;
+            margin-top:15px;
+            text-align:center;
+            color:#1976D2;
+            text-decoration:none;
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="contenedor">
+
+    <h1>Editar usuario</h1>
+
+    <!-- Formulario para actualizar un usuario mediante POST. -->
+    <form th:action="@{/usuarios/actualizar}"
+          th:object="${usuario}"
+          method="post">
+
+        <!-- Mantener el identificador del usuario durante la actualización. -->
+        <input type="hidden" th:field="*{idUsuario}">
+
+        <label>Nombre:</label><br>
+
+        <input type="text"
+               th:field="*{nombre}"
+               required>
+
+        <label>Apellido:</label><br>
+
+        <input type="text"
+               th:field="*{apellido}"
+               required>
+
+        <label>Correo:</label><br>
+
+        <input type="email"
+               th:field="*{correo}"
+               required>
+
+        <label>Contraseña:</label><br>
+
+        <input type="password"
+               th:field="*{contrasena}"
+               required>
+
+        <label>Fecha de registro:</label><br>
+
+        <input type="date"
+               th:field="*{fechaRegistro}"
+               required>
+
+        <!-- Botón para guardar los cambios del usuario. -->
+        <input type="submit"
+               value="Actualizar usuario">
+
+    </form>
+
+    <a class="volver"
+       th:href="@{/usuarios}">
+        Volver a la lista
+    </a>
+
+</div>
+
+</body>
+
+</html>
