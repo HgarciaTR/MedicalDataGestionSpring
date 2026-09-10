@@ -26,6 +26,14 @@
             box-shadow: 0 0 18px rgba(0,0,0,0.18);
         }
 
+        /* Estilo del logo de la aplicación. */
+        .logo {
+            display: block;
+            width: 110px;
+            height: auto;
+            margin: 0 auto 15px auto;
+        }
+
         .titulo {
             text-align: center;
             color: #1565C0;
@@ -121,6 +129,11 @@
 <body>
 
 <div class="contenedor">
+
+    <!-- Logo de Medical Data Gestión. -->
+    <img class="logo"
+         th:src="@{/imagenes/logo.png}"
+         alt="Logo de Medical Data Gestión">
 
     <h1 class="titulo">
         Medical Data Gestión

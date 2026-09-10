@@ -23,7 +23,7 @@
 
             width: 90%;
             max-width: 1100px;
-            margin: 40px auto;
+            margin: 30px auto;
 
         }
 
@@ -66,6 +66,15 @@
             border-radius: 12px;
             box-shadow: 0 0 15px rgba(0,0,0,0.12);
             text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+
+        }
+
+        /* Efecto sencillo al pasar el cursor sobre las tarjetas. */
+        .tarjeta:hover {
+
+            transform: translateY(-4px);
+            box-shadow: 0 5px 18px rgba(0,0,0,0.18);
 
         }
 
@@ -115,6 +124,17 @@
         .cerrar:hover {
 
             background: #8E0000;
+
+        }
+
+        /* Imagen decorativa ubicada en la parte inferior del panel. */
+        .imagen-panel {
+
+            display: block;
+            width: 100%;
+            max-width: 950px;
+            height: auto;
+            margin: 20px auto 0 auto;
 
         }
 
@@ -215,6 +235,11 @@
         </a>
 
     </div>
+
+    <!-- Imagen decorativa relacionada con el área médica. -->
+    <img class="imagen-panel"
+         th:src="@{/imagenes/fondo-panel.png}"
+         alt="Ilustración médica del panel principal">
 
 </div>
 
