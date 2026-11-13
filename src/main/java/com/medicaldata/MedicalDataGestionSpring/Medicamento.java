@@ -12,7 +12,10 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 // Entidad que representa la tabla MEDICAMENTO de la base de datos.
 @Entity
@@ -41,6 +44,14 @@ public class Medicamento {
     @ManyToOne
     @JoinColumn(name = "USUARIO_idUSUARIO")
     private Usuario usuario;
+
+    // Fecha y hora en que se registró el medicamento.
+    @Column(name = "fechaRegistro")
+    private LocalDateTime fechaRegistro;
+
+    // Fecha y hora de la última actualización del medicamento.
+    @Column(name = "fechaActualizacion")
+    private LocalDateTime fechaActualizacion;
 
     // Obtiene el identificador del medicamento.
     public Integer getIdMedicamento() {
@@ -90,6 +101,53 @@ public class Medicamento {
     // Asigna el usuario que registró el medicamento.
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    // Obtiene la fecha de registro del medicamento.
+    public LocalDateTime getFechaRegistro() {
+        return fechaRegistro;
+    }
+
+    // Asigna la fecha de registro del medicamento.
+    public void setFechaRegistro(LocalDateTime fechaRegistro) {
+        this.fechaRegistro = fechaRegistro;
+    }
+
+    // Obtiene la fecha de la última actualización.
+    public LocalDateTime getFechaActualizacion() {
+        return fechaActualizacion;
+    }
+
+    // Asigna la fecha de la última actualización.
+    public void setFechaActualizacion(LocalDateTime fechaActualizacion) {
+        this.fechaActualizacion = fechaActualizacion;
+    }
+
+    // Obtiene el estado del medicamento según su fecha de vencimiento.
+    @Transient
+    public String getEstadoVencimiento() {
+
+        // Comprueba si existe una fecha de vencimiento.
+        if (fechaVencimiento == null) {
+            return "Sin fecha";
+        }
+
+        // Obtiene la fecha actual y la fecha de vencimiento.
+        LocalDate fechaActual = LocalDate.now();
+        LocalDate vencimiento = fechaVencimiento.toLocalDate();
+
+        // Comprueba si el medicamento se encuentra vencido.
+        if (vencimiento.isBefore(fechaActual)) {
+            return "Vencido";
+        }
+
+        // Comprueba si el medicamento vence en los próximos 30 días.
+        if (!vencimiento.isAfter(fechaActual.plusDays(30))) {
+            return "Por vencer";
+        }
+
+        // Indica que el medicamento se encuentra vigente.
+        return "Vigente";
     }
 
 }

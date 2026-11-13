@@ -1,15 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <title>Registrar medicamento</title>
+    <title>Medical Data Gestión | Registrar medicamento</title>
 
     <style>
-
         body {
             margin: 0;
             padding: 0;
@@ -23,7 +18,7 @@
             background: white;
             padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.20);
+            box-shadow: 0px 0px 15px rgba(0,0,0,0.20);
         }
 
         h1 {
@@ -35,8 +30,8 @@
             font-weight: bold;
         }
 
-        input[type=text],
-        input[type=date] {
+        input[type="text"],
+        input[type="date"] {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -46,7 +41,7 @@
             box-sizing: border-box;
         }
 
-        input[type=submit] {
+        input[type="submit"] {
             width: 100%;
             padding: 12px;
             background: #1976D2;
@@ -58,7 +53,7 @@
             margin-top: 10px;
         }
 
-        input[type=submit]:hover {
+        input[type="submit"]:hover {
             background: #0D47A1;
         }
 
@@ -78,55 +73,72 @@
             color: #555555;
         }
 
-    </style>
+        /* Estilos de los mensajes de advertencia. */
+        .error {
+            padding: 12px;
+            margin-bottom: 20px;
+            background: #FFEBEE;
+            color: #C62828;
+            border-radius: 5px;
+        }
 
+    </style>
 </head>
 
 <body>
 
-<div class="contenedor">
+    <div class="contenedor">
 
-    <h1>Registrar medicamento</h1>
+        <h1>Registrar medicamento</h1>
 
-    <div class="usuario-activo">
+        <!-- Información sobre el usuario que registra el medicamento. -->
+        <div class="usuario-activo">
+            El medicamento será registrado por el usuario que inició sesión.
+        </div>
 
-        El medicamento será registrado por el usuario que inició sesión.
+        <!-- Mostrar los mensajes de validación enviados por el Controller. -->
+        <div class="error"
+             th:if="${error != null}"
+             th:text="${error}">
+        </div>
+
+        <!-- Formulario para registrar un medicamento mediante POST. -->
+        <form th:action="@{/medicamentos/guardar}"
+              th:object="${medicamento}"
+              method="post">
+
+            <!-- Campo para ingresar el nombre del medicamento. -->
+            <label>Nombre del medicamento:</label>
+
+            <input type="text"
+                   th:field="*{nombreMedicamento}"
+                   required>
+
+            <!-- Campo para ingresar la fecha de vencimiento. -->
+            <label>Fecha de vencimiento:</label>
+
+            <input type="date"
+                   th:field="*{fechaVencimiento}"
+                   required>
+
+            <!-- Campo para ingresar la descripción del medicamento. -->
+            <label>Descripción:</label>
+
+            <input type="text"
+                   th:field="*{descripcion}">
+
+            <!-- Botón para guardar el medicamento. -->
+            <input type="submit"
+                   value="Guardar medicamento">
+
+        </form>
+
+        <!-- Enlace para regresar al listado de medicamentos. -->
+        <a class="volver" th:href="@{/medicamentos}">
+            Volver a la lista
+        </a>
 
     </div>
 
-    <form th:action="@{/medicamentos/guardar}"
-          th:object="${medicamento}"
-          method="post">
-
-        <label>Nombre del medicamento:</label><br>
-
-        <input type="text"
-               th:field="*{nombreMedicamento}"
-               required>
-
-        <label>Fecha de vencimiento:</label><br>
-
-        <input type="date"
-               th:field="*{fechaVencimiento}"
-               required>
-
-        <label>Descripción:</label><br>
-
-        <input type="text"
-               th:field="*{descripcion}">
-
-        <input type="submit"
-               value="Guardar medicamento">
-
-    </form>
-
-    <a class="volver"
-       th:href="@{/medicamentos}">
-        Volver a la lista
-    </a>
-
-</div>
-
 </body>
-
 </html>
